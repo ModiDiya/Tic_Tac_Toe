@@ -13,20 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
+      # Checkout your code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # (Optional) Validate HTML
+      # (Optional) Validate HTML files
       - name: Validate HTML
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
           root: .
 
-      # Deploy to GitHub Pages
+      # Deploy static files to GitHub Pages
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .  # The root folder containing your index.html
+          publish_branch: gh-pages
+          publish_dir: .  # folder containing your index.html
